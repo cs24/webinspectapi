@@ -1,0 +1,15 @@
+template:
+    url: https://github.com/CouscousPHP/Template-Light
+
+# Base URL of the published website
+baseUrl: https://github.com/Target/webinspectapi/pages/tts-pse/webinspect_api
+
+# Used to link to the GitHub project
+github:
+    user: target
+    repo: webinspectapi
+    url: github.com
+
+title: WebInspect API
+subTitle: A python module for the WebInspect API
+

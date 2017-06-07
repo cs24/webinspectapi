@@ -32,7 +32,7 @@ Example
     for scan in scans.data:
             print(str(scan['Name']), str(scan['Status']), str(scan['ID']))
 
-Supporting information for each method available can be found in the `documentation <docs/README.md>`_.
+Supporting information for each method available can be found in the `documentation <https://target.github.io/webinspectapi/>`_.
 
 Bugs and Feature Requests
 -------------------------

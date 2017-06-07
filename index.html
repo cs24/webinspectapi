@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>WebInspect API</title>
+
+        <link rel="stylesheet" href="https://target.github.io/webinspectapi/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://target.github.io/webinspectapi/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://target.github.io/webinspectapi/css/highlight.dark.css">
+        <link rel="stylesheet" href="https://target.github.io/webinspectapi/css/main.css">
+    </head>
+    <body>
+
+        <header class="navbar navbar-default navbar-fixed-top">
+
+            <a class="navbar-brand" href="https://target.github.io/webinspectapi/">
+                WebInspect API
+                <small class="hidden-xs hidden-sm">
+                    A python module for the WebInspect API
+                </small>
+            </a>
+
+                            <a href="https://github.com/target/webinspectapi">
+                    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png">
+                </a>
+            
+        </header>
+
+        <main class="container">
+            <div class="row">
+
+                
+                <section id="content" class="col-sm-12">
+                    <h1 id="webinspect-api-documentation">WebInspect API Documentation</h1>
+<p>The webinspect-api module contains a class that wraps the WebInspect RESTful calls in a response object.  The class WebInspectApi class contains a set of prepared <code>GET</code> and <code>POST</code> calls.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<p><a href="#constructor">Constructor</a></p>
+<p><a href="#response-object">Response Object</a></p>
+<p><a href="#scanner">Scanner</a></p>
+<ul>
+<li><a href="#continue-scan">Continue scan: <code>continue_scan</code></a></li>
+<li><a href="#create-scan">Create scan: <code>create_scan</code></a></li>
+<li><a href="#delete-scan">Delete scan: <code>delete_scan</code></a></li>
+<li><a href="#export-scan-format">Export scan format: <code>export_scan_format</code></a></li>
+<li><a href="#get-current-status">Get current status: <code>get_current_status</code></a></li>
+<li><a href="#get-scan-by-name">Get scan by name: <code>get_scan_by_name</code></a></li>
+<li><a href="#get-scan-issues">Get scan issues: <code>get_scan_issues</code></a></li>
+<li><a href="#get-scan-log">Get scan log: <code>get_scan_log</code></a></li>
+<li><a href="#list-scans">List scans: <code>list_scans</code></a></li>
+<li><a href="#list-settings">List settings: <code>list_settings</code></a></li>
+<li><a href="#list-webmacros">List webmacros: <code>list_webmacros</code></a></li>
+<li><a href="#stop-scan">Stop scan: <code>stop_scan</code></a></li>
+<li><a href="#upload-settings">Upload settings: <code>upload_settings</code></a></li>
+<li><a href="#upload-webmacro">Upload webmacro: <code>upload_webmacro</code></a></li>
+</ul>
+<p><a href="#securebase">SecureBase</a></p>
+<ul>
+<li><a href="#delete-policy">Delete policy: <code>delete_policy</code></a></li>
+<li><a href="#get-policy-by-guid">Get policy by guid: <code>get_policy_by_guid</code></a></li>
+<li><a href="#get-policy-by-name">Get policy by name: <code>get_policy_by_name</code></a></li>
+<li><a href="#list-policies">List policies: <code>list_policies</code></a></li>
+<li><a href="#upload-policy">Upload policy: <code>upload_policy</code></a></li>
+</ul>
+<h2 id="constructor">Constructor</h2>
+<p>The constructor requires only one value - the host address of the WebInspect API. All others are optional.</p>
+<h4 id="required-parameters">Required parameters</h4>
+<p><em>host</em> - The address of the WebInspect API</p>
+<h4 id="optional-parameters">Optional parameters</h4>
+<p><em>username</em> - If the API is configured for basic auth, both username and password must be provided.<br>
+<em>password</em> - If the API is configured for basic auth, both username and password must be provided.<br>
+<em>verify_ssl</em> - Defaults to true. To disable verification of an HTTPS connection to the API, set to False.<br>
+<em>user_agent</em> - User agent for requests.<br>
+<em>cert</em> - If the API is configured for client-certificate based auth, the path to the client certificate.</p>
+<hr />
+<h2 id="response-object">Response object</h2>
+<p>All calls in this module return an object having the following properties and methods.</p>
+<h3 id="properties">Properties</h3>
+<p><em>success</em> - a boolean indicating if the call was successful or not. True indicates a successful call, while False indicates an unsuccessful call.<br>
+<em>response_code</em> - the actual HTTP response code from the call to the WebInspect server.<br>
+<em>message</em> - if the call was successful, message is 'OK'. If the call was not successful, message is descriptive text of the failure. e.g. An SSL error occurred, etc.<br>
+<em>data</em> - the data (if any) returned from the WebInspect API.<br></p>
+<h3 id="methods">Methods</h3>
+<p><em>data_json()</em> - Returns object data as JSON. An optional boolean parameter (pretty), if set to True, will return pretty-formatted JSON.</p>
+<p>Below is an example of constructing a WebInspectAPI class, calling a method, and exploring the response.</p>
+<pre><code class="language-python">
+&gt;&gt;&gt; from webinspectapi import webinspect
+
+&gt;&gt;&gt; wi = webinspect.WebInspectApi('http://myserver.com:8083')
+
+&gt;&gt;&gt; response = wi.list_scans()
+
+&gt;&gt;&gt; response.success
+True
+
+&gt;&gt;&gt; response.response_code
+200
+
+&gt;&gt;&gt; response.message
+'OK'
+
+&gt;&gt;&gt; print response.data_json(pretty=True)
+[
+    {
+        "ID": "01234567-89ab-cdef-0123-456789abcdef",
+        "Name": "a_scan_that_ran",
+        "StartTime": "2016-12-09T13:48:25.993",
+        "Status": "Complete"
+    },
+    ...</code></pre>
+<hr />
+<h2 id="scanner">Scanner</h2>
+<h3 id="continue-scan">Continue Scan: <code>continue_scan</code></h3>
+<p>Resume a stopped scan.</p>
+<h4 id="parameters">Parameters</h4>
+<p><em>scan_guid</em></p>
+<h4 id="example">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.continue_scan('01234567-89ab-cdef-0123-456789abcdef')</code></pre>
+<hr />
+<h3 id="create-scan">Create Scan: <code>create_scan</code></h3>
+<p>A new scan can be created by specifying a settings file that exists in the WebInspect scan settings folder.
+Overrides are optional and provide a way to make changes to certain fields in the referenced scan settings file.</p>
+<h4 id="parameters-1">Parameters</h4>
+<p><em>settings</em><br>
+<em>scan_name</em></p>
+<h4 id="example-1">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.create_scan(riches, riches-20160905)</code></pre>
+<hr />
+<h3 id="delete-scan">Delete scan: <code>delete_scan</code></h3>
+<p>Delete an existing scan.</p>
+<h4 id="parameters-2">Parameters</h4>
+<p><em>scan_guid</em></p>
+<h4 id="example-2">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.delete_scan('01234567-89ab-cdef-0123-456789abcdef')</code></pre>
+<hr />
+<h3 id="export-scan-format">Export scan format: <code>export_scan_format</code></h3>
+<p>Export and download an existing scan in the specified format. Details of supported format and detail type are in the formal HP WebInspect documentation.</p>
+<h4 id="parameters-3">Parameters</h4>
+<p><em>scan_id</em><br>
+<em>extension</em><br>
+<em>detail_type</em> (optional)</p>
+<h4 id="example-3">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.export_scan_format('01234567-89ab-cdef-0123-456789abcdef','issue')</code></pre>
+<hr />
+<h3 id="get-current-status">Get current status: <code>get_current_status</code></h3>
+<p>Retrieve the status of an existing scan</p>
+<h4 id="parameters-4">Parameters</h4>
+<p><em>scan_id</em></p>
+<h4 id="example-4">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.get_current_status('01234567-89ab-cdef-0123-456789abcdef')</code></pre>
+<hr />
+<h3 id="get-scan-by-name">Get scan by name: <code>get_scan_by_name</code></h3>
+<p>Retrieve an existing scan</p>
+<h4 id="parameters-5">Parameters</h4>
+<p><em>scan_name</em></p>
+<h4 id="example-5">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.get_scan_by_name('some_scan')</code></pre>
+<hr />
+<h3 id="get-scan-issues">Get scan issues: <code>get_scan_issues</code></h3>
+<p>Retrieve issues identified by a scan.</p>
+<h4 id="parameters-6">Parameters</h4>
+<p><em>scan_guid</em></p>
+<h4 id="example-6">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.get_scan_issues('01234567-89ab-cdef-0123-456789abcdef')</code></pre>
+<hr />
+<h3 id="get-scan-log">Get scan log: <code>get_scan_log</code></h3>
+<p>Retrieve the log generated by a scan</p>
+<h4 id="parameters-7">Parameters</h4>
+<p><em>scan_guid</em></p>
+<h4 id="example-7">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.get_scan_log('01234567-89ab-cdef-0123-456789abcdef')</code></pre>
+<hr />
+<h3 id="list-scans">List scans: <code>list_scans</code></h3>
+<p>Retrieve a list of existing scans</p>
+<h4 id="parameters-8">Parameters</h4>
+<p><em>none</em></p>
+<h4 id="example-8">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.list_scans()</code></pre>
+<hr />
+<h3 id="list-settings">List settings: <code>list_settings</code></h3>
+<p>Retrieve a list of existing settings</p>
+<h4 id="parameters-9">Parameters</h4>
+<p><em>none</em></p>
+<h4 id="example-9">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.list_settings()</code></pre>
+<hr />
+<h3 id="list-webmacros">List webmacros: <code>list_webmacros</code></h3>
+<p>Retrieve a list of webmacros</p>
+<h4 id="parameters-10">Parameters</h4>
+<p><em>none</em></p>
+<h4 id="example-10">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.list_webmacros()</code></pre>
+<hr />
+<h3 id="stop-scan">Stop scan: <code>stop_scan</code></h3>
+<p>Stop an existing scan</p>
+<h4 id="parameters-11">Parameters</h4>
+<p><em>scan_guid</em></p>
+<h4 id="example-11">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.stop_scan('01234567-89ab-cdef-0123-456789abcdef')</code></pre>
+<hr />
+<h3 id="upload-settings">Upload settings: <code>upload_settings</code></h3>
+<p>Upload a settings file to the server</p>
+<h4 id="parameters-12">Parameters</h4>
+<p><em>settings_file_path</em></p>
+<h4 id="example-12">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.upload_settings('/User/workspace/some_settings.xml')</code></pre>
+<hr />
+<h3 id="upload-webmacro">Upload webmacro: <code>upload_webmacro</code></h3>
+<p>Upload a webmacro file to the server</p>
+<h4 id="parameters-13">Parameters</h4>
+<p><em>macro_file_path</em></p>
+<h4 id="example-13">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.upload_webmacro('/User/workspace/some_macro.webmacro')</code></pre>
+<hr />
+<h3 id="wait-for-status-change">Wait for status change: <code>wait_for_status_change</code></h3>
+<p>Wait for the identified scan's status to change. This call will not return until the scan status changes, or until the server connection is lost.</p>
+<h4 id="parameters-14">Parameters</h4>
+<p><em>scan_id</em></p>
+<h4 id="example-14">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.wait_for_status_change('01234567-89ab-cdef-0123-456789abcdef')</code></pre>
+<hr />
+<h2 id="securebase">SecureBase</h2>
+<h3 id="delete-policy">Delete policy: <code>delete_policy</code></h3>
+<p>Delete an existing policy.</p>
+<h4 id="parameters-15">Parameters</h4>
+<p><em>policy_guid</em></p>
+<h4 id="example-15">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.delete_policy('01234567-89ab-cdef-0123-456789abcdef')</code></pre>
+<hr />
+<h3 id="get-policy-by-guid">Get policy by guid: <code>get_policy_by_guid</code></h3>
+<p>Retrieve an existing policy</p>
+<h4 id="parameters-16">Parameters</h4>
+<p><em>policy_guid</em></p>
+<h4 id="example-16">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.get_policy_by_guid('01234567-89ab-cdef-0123-456789abcdef')</code></pre>
+<hr />
+<h3 id="get-policy-by-name">Get policy by name: <code>get_policy_by_name</code></h3>
+<p>Retrieves an existing policy</p>
+<h4 id="parameters-17">Parameters</h4>
+<p><em>name</em></p>
+<h4 id="example-17">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.get_policy_by_name('some_policy')</code></pre>
+<hr />
+<h3 id="list-policies">List policies: <code>list_policies</code></h3>
+<p>Retrieve a list of existing policies</p>
+<h4 id="parameters-18">Parameters</h4>
+<p><em>none</em></p>
+<h4 id="example-18">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.list_policies()</code></pre>
+<hr />
+<h3 id="upload-policy">Upload policy: <code>upload_policy</code></h3>
+<p>Upload a policy file to the server</p>
+<h4 id="parameters-19">Parameters</h4>
+<p><em>policy_file_path</em></p>
+<h4 id="example-19">Example</h4>
+<pre><code class="language-python">wi = webinspect.WebInspectAPI(host)
+response = wi.upload_policy('/User/workspace/some_policy.xml')</code></pre>
+<hr />
+                </section>
+
+            </div>
+        </main>
+
+        <footer>
+            <div class="container">
+                <p class="text-muted">
+                    website generated with <a href="http://couscous.io" title="Markdown website generator">Couscous</a>
+                </p>
+            </div>
+        </footer>
+
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script src="//yastatic.net/highlightjs/8.2/highlight.min.js"></script>
+
+        <script>
+            $(function() {
+                $("section>h1").wrap('<div class="page-header" />');
+                // Syntax highlighting
+                hljs.initHighlightingOnLoad();
+            });
+        </script>
+
+    </body>
+</html>

@@ -12,7 +12,7 @@ Several quick start options are available:
 - Install with pip: :code:`pip install webinspectapi`
 - Build locally: :code:`python setup.py build`
 - `Download the latest release <https://github.com/target/webinspectapi/releases/latest>`_
-https://github.com/target/webinspectapi/releases
+
 Example
 -------
 

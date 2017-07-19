@@ -43,7 +43,7 @@ setup(
     download_url='https://github.com/target/webinspectapi/tarball/' + version,
     license='MIT',
     install_requires=['requests'],
-    keywords=['webinspect', 'api', 'security', 'software', 'hpe'],
+    keywords=['webinspect', 'api', 'security', 'software', 'hpe', 'micro focus'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
@@ -53,5 +53,6 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
+
     ]
 )

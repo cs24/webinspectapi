@@ -1,10 +1,10 @@
 WebInspect API
---------------
+**************
 
 A Python module to assist with the `WebInspect <http://www8.hp.com/us/en/software-solutions/webinspect-dynamic-analysis-dast/>`__ RESTFul API to administer scans.
 
-Quick Start |PyPI version|
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Quick Start
+~~~~~~~~~~~
 
 Several quick start options are available:
 
@@ -45,3 +45,4 @@ Copyright and License
 
 - Copyright 2017 Target, Inc.
 - `Licensed under MIT <https://github.com/target/webinspectapi/blob/master/LICENSE.txt/>`__.
+

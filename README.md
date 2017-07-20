@@ -1,4 +1,4 @@
-### __WebInspect API__
+### _WebInspect API_
 
 A Python module to assist with the [WebInspect](http://www8.hp.com/us/en/software-solutions/webinspect-dynamic-analysis-dast)  RESTFul API to administer scans.
 

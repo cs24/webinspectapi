@@ -35,7 +35,7 @@ setup(
     name='webinspectapi',
     packages=['webinspectapi'],
     version=version,
-    description='A Python module to assist with the WebInspect RESTFul API to administer scans.',
+    description='A Python module to assist with DAST scan administration of WebInspect from the RESTFul API.',
     long_description=readme,
     author='Brandon Spruth, Jim Nelson',
     author_email='brandon.spruth2@target.com, jim.nelson2@target.com',
@@ -43,7 +43,7 @@ setup(
     download_url='https://github.com/target/webinspectapi/tarball/' + version,
     license='MIT',
     install_requires=['requests'],
-    keywords=['webinspect', 'api', 'security', 'software', 'hpe', 'micro focus'],
+    keywords=['webinspect', 'api', 'security', 'software', 'hpe', 'micro focus', 'dast'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',

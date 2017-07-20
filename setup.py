@@ -19,7 +19,7 @@ if sys.argv[-1] == 'build':
     sys.exit(0)
 
 if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist bdist_wheel upload -r pypi')
+    os.system('python setup.py sdist --formats=zip')
     sys.exit(0)
     
 if sys.argv[-1] == 'tag':

@@ -10,7 +10,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-with open('README.rst', 'r') as f:
+with open('README.md', 'r') as f:
     readme = f.read()
 
 # Publish helper

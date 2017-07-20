@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+### WebInspect API
+=======
 ### _WebInspect API_
+>>>>>>> 9542954c31427e6440310537602bdc84884916d8
 
 A Python module to assist with the [WebInspect](http://www8.hp.com/us/en/software-solutions/webinspect-dynamic-analysis-dast)  RESTFul API to administer scans.
 
@@ -32,10 +36,9 @@ Supporting information for each method available can be found in the [documentat
 
 __Bugs and Feature Requests__
 
-Found something that doesn't seem right or have a feature request? `Please open a new issue <https://github.com/target/webinspectapi/issues/new>`_.
+Found something that doesn't seem right or have a feature request? [Please open a new issue](https://github.com/target/webinspectapi/issues/new).
 
-Copyright and License
----------------------
+__Copyright and License__
 
 - Copyright 2017 Target, Inc.
-- `Licensed under MIT <https://github.com/target/webinspectapi/blob/master/LICENSE.txt>`_.
+- [Licensed under MIT](https://github.com/target/webinspectapi/blob/master/LICENSE.txt)

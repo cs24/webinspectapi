@@ -22,15 +22,6 @@ if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist --formats=zip')
     sys.exit(0)
     
-if sys.argv[-1] == 'tag':
-    os.system("git tag -a %s -m 'version %s'" % (version, version))
-    os.system("git push --tags")
-    sys.exit(0)
-
-if sys.argv[-1] == 'publish-test':
-    os.system('python setup.py sdist bdist_wheel upload -r pypitest')
-    sys.exit(0)
-
 setup(
     name='webinspectapi',
     packages=['webinspectapi'],
@@ -42,7 +33,8 @@ setup(
     url='https://github.com/target/webinspectapi',
     download_url='https://github.com/target/webinspectapi/tarball/' + version,
     license='MIT',
-    install_requires=['requests'],
+    zip_safe=True,
+    install_requires=['requests','logging'],
     keywords=['webinspect', 'api', 'security', 'software', 'hpe', 'micro focus', 'dast'],
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -54,5 +46,7 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.0',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
     ]
 )

@@ -43,6 +43,6 @@ Found something that doesn't seem right or have a feature request? `Please open 
 Copyright and License
 ~~~~~~~~~~~~~~~~~~~~~
 
-- Copyright 2017 Target, Inc.
+- Copyright 2017 Target Brands, Inc.
 - `Licensed under MIT <https://github.com/target/webinspectapi/blob/master/LICENSE.txt/>`__.
 

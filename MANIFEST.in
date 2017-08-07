@@ -1,2 +1,2 @@
 include docs/*
-include LICENSE.txt
+include *.rst *.txt

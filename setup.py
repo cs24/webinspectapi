@@ -26,7 +26,7 @@ setup(
     name='webinspectapi',
     packages=['webinspectapi'],
     version=version,
-    description='A Python module to assist with DAST scan administration of WebInspect from the RESTFul API.',
+    description='Python library enumerating the WebInspect RESTFul API scan, securebase, and proxy endpoints.',
     long_description=readme,
     author='Brandon Spruth, Jim Nelson',
     author_email='brandon.spruth2@target.com, jim.nelson2@target.com',

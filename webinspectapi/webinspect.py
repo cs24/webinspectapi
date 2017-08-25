@@ -60,9 +60,9 @@ class WebInspectApi(object):
         :return: Export scan data to one of several formats.
         """
         if extension == '.xml' and detail_type:
-            url = '/webinspect/scanner/' + str(scan_id) + "?detailType=" + detail_type
+            url = '/webinspect/scanner/scans/' + str(scan_id) + '.' + str(extension) + "?detailType=" + detail_type
         else:
-            url = '/webinspect/scanner/' + str(scan_id) + '.' + str(extension)
+            url = '/webinspect/scanner/scans/' + str(scan_id) + '.' + str(extension)
 
         return self._request('GET', url)
 

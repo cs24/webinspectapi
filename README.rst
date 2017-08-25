@@ -19,13 +19,13 @@ Example
 
 
     # import the package
-    from webinspectapi import webinspect
+    import webinspectapi
 
     # setup webinspect connection information
     host = 'http://localhost:8083/webinspect/'
 
     # instantiate the webinspect api wrapper
-    wi = webinspect.WebInspectAPI(host)
+    wi = webinspectapi.WebInspectApi(host)
 
     # List scans
     scans = wi.list_scans()

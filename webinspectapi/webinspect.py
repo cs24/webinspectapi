@@ -71,7 +71,7 @@ class WebInspectApi(object):
         :param scan_id:
         :return: Retrieves status of scanId valid operations are: Running, Complete, Incomplete
         """
-        return self._request('GET', '/webinspect/scanner/' + str(scan_id) + '?action=getcurrentstatus')
+        return self._request('GET', '/webinspect/scanner/scans/' + str(scan_id) + '?action=getcurrentstatus')
 
     def get_policy_by_guid(self, policy_guid):
         """
@@ -200,7 +200,7 @@ class WebInspectApi(object):
         :param scan_id: Assigned GUID for scan running.
         :return: Polls scanId with a Running status
         """
-        return self._request('GET', '/webinspect/scanner/' + str(scan_id) + '?action=waitforstatuschange')
+        return self._request('GET', '/webinspect/scanner/scans/' + str(scan_id) + '?action=waitforstatuschange')
 
     @staticmethod
     def _build_list_params(param_name, key, values):

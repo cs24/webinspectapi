@@ -2,7 +2,7 @@
    :target: https://pypi.org/project/webinspectapi
 .. image:: https://img.shields.io/pypi/pyversions/webinspectapi.svg
 .. image:: https://img.shields.io/pypi/dm/webinspectapi.svg
-.. image:: https://img.shields.io/travis/jaraco/webinspectapi/master.svg
+.. image:: https://img.shields.io/travis/target/webinspectapi/master.svg
    :target: http://travis-ci.org/target/webinspectapi
    
 WebInspect API

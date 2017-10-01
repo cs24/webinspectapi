@@ -1,7 +1,6 @@
 .. image:: https://img.shields.io/pypi/v/webinspectapi.svg
    :target: https://pypi.org/project/webinspectapi
 .. image:: https://img.shields.io/pypi/pyversions/webinspectapi.svg
-.. image:: https://img.shields.io/pypi/dm/webinspectapi.svg
 .. image:: https://img.shields.io/travis/target/webinspectapi/master.svg
    :target: http://travis-ci.org/target/webinspectapi
    

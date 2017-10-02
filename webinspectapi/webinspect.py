@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 
-__author__ = "Brandon Spruth (brandon.spruth2@target.com), Jim Nelson (jim.nelson2@target.com)"
-__copyright__ = "(C) 2017 Target Brands, Inc. MIT."
-__contributors__ = ["Brandon Spruth", "Jim Nelson"]
+__author__ = "Brandon Spruth (brandon.spruth2@target.com), Jim Nelson (jim.nelson2@target.com)," \
+             "Matt Dunaj (matthew.dunaj@target.com)"
+__copyright__ = "(C) 2017 Target Brands, Inc."
+__contributors__ = ["Brandon Spruth", "Jim Nelson", "Matthew Dunaj"]
 __status__ = "Production"
+__license__ = "MIT"
 
 import json
 import ntpath

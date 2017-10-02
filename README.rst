@@ -1,3 +1,9 @@
+.. image:: https://img.shields.io/pypi/v/webinspectapi.svg
+   :target: https://pypi.org/project/webinspectapi
+.. image:: https://img.shields.io/pypi/pyversions/webinspectapi.svg
+.. image:: https://img.shields.io/travis/target/webinspectapi/master.svg
+   :target: http://travis-ci.org/target/webinspectapi
+   
 WebInspect API
 **************
 
@@ -42,7 +48,6 @@ Found something that doesn't seem right or have a feature request? `Please open 
 
 Copyright and License
 ~~~~~~~~~~~~~~~~~~~~~
-
+.. image:: https://img.shields.io/github/license/target/webinspectapi.svg?style=flat-square
 - Copyright 2017 Target Brands, Inc.
-- `Licensed under MIT <https://github.com/target/webinspectapi/blob/master/LICENSE.txt/>`__.
 

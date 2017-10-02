@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 
-__author__ = "Brandon Spruth (brandon.spruth2@target.com), Jim Nelson (jim.nelson2@target.com)"
-__copyright__ = "(C) 2017 Target Brands, Inc. MIT."
-__contributors__ = ["Brandon Spruth", "Jim Nelson"]
+__author__ = "Brandon Spruth (brandon.spruth2@target.com), Jim Nelson (jim.nelson2@target.com)," \
+             "Matt Dunaj (matthew.dunaj@target.com)"
+__copyright__ = "(C) 2017 Target Brands, Inc."
+__contributors__ = ["Brandon Spruth", "Jim Nelson", "Matthew Dunaj"]
 __status__ = "Production"
+__license__ = "MIT"
 
 import json
 import ntpath
@@ -12,6 +14,7 @@ import requests
 import requests.exceptions
 import requests.packages.urllib3
 from . import __version__ as version
+
 
 class WebInspectApi(object):
     def __init__(self, host, username=None, password=None, verify_ssl=True, user_agent=None, cert=None):
@@ -201,6 +204,18 @@ class WebInspectApi(object):
         :return: Polls scanId with a Running status
         """
         return self._request('GET', '/webinspect/scanner/scans/' + str(scan_id) + '?action=waitforstatuschange')
+
+    #TODO implement complete set of actions trust CA, start, stop, download webmacro, delete.
+    def start_proxy(self, proxy_id, proxy_port, proxy_address):
+        """
+        :param proxy_id: Arbitrary user controlled ID for WI proxy .
+        :param proxy_port: Assigned port to initialize proxy traffic.
+        :param proxy_address: Address to be used to proxy traffic, typically the WI instance public addr.
+        :return: creates socket listener with proxy port and address
+        """
+        return self._request('POST', '/webinspect/proxy/' + 'instanceId=' + str(proxy_id) + '&amp;address='
+                             + str(proxy_port + '&amp;port=' + str(proxy_address)))
+
 
     @staticmethod
     def _build_list_params(param_name, key, values):

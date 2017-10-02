@@ -8,7 +8,6 @@ python:
 branches:
   except:
     - gh-pages
-    - master
     
 install:
 # work-around to install cryptography dependency of known setup-tools bug

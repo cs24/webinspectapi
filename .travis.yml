@@ -1,9 +1,6 @@
 sudo: false
 language: python
-python:
-- '2.7'
-- '3.6'
-- nightly
+python: '3.6'
 branches:
   except:
   - gh-pages
@@ -13,9 +10,11 @@ install:
 script: pytest
 deploy:
   provider: pypi
+  distributions: sdist bdist_wheel
   user: bspruth
   password:
     secure: E38BpvaZ4rPGGZaaRB28L9JhdXqycmbutAnsv2ufxPlqc/rQAOo2lVKTJ/Cv3zfzml24+aM+oFsuDpfw89hawFSaR9NgXl47WhS6KYaS6Fh953nwAhDlB3uKl2u7g1HNgPsDq28L6GfKMryxQ1HjQ3vC5arB5X4Zbi9laR3JXiYJoolH7eqFVygQFc2aij38KriNQtgf9mdtmw4byBBQ4/HpPZN3FaNciJcAfa4vElWK4DJMRVDo1gJyta5tjyEW8/uM0AWGiGKA+ojjVa5ugpb2mIY2J6g8N33nI0VQPCcVWkx/pNc/2s9PXWUFmrv282cX8H8efgPpyxVCL+uXoFJ2aSjDfjMlaeGJnzQ8EPR7X1I5b9ojc3qaAP8I1bxcvMLJNEKnJ0EkvsrUKv/g3TARO4w2OL4Dr904LYbiR9w83Q5wWZejx4f/F0bB0jppYn+JYZ7eagXuUe3l9wI2Zms8vp6x20uPFBXivtb8XpI2qFLeyc5mVA7mLDN77TJcErq1v0bsmE+Mngsr4T0MJx2SqtA2KiT1js1aE8wgEGMrnyEdbivYTqwDe5vF7dpLZ2Fz7hPilP4PP09SML5lum+JEbf3IDHIMAElv2nVp+zoC7nJGfwSrDrBICToA2jl9gEQyttZ4vzLKHylU/mGNkRjWDekiOiBXB+MRWWaQM8=
   on:
     tags: true
     branch: master
+    repo: target/webinspectapi

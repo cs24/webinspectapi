@@ -9,7 +9,6 @@ __license__ = "MIT"
 
 import json
 import ntpath
-import logging
 import requests
 import requests.exceptions
 import requests.packages.urllib3
@@ -245,10 +244,10 @@ class WebInspectApi(object):
         headers.update({'User-Agent': self.user_agent})
 
         try:
-            logger('Performing method {}'.format(method))
-            logger('URL {}'.format(self.host + url))
-            logger('params {}'.format(params))
-            logger('headers {}'.format(headers))
+            print('Performing method {}'.format(method))
+            print('URL {}'.format(self.host + url))
+            print('params {}'.format(params))
+            print('headers {}'.format(headers))
 
             if self.auth_type == 'basic':
                 response = requests.request(method=method, url=self.host + url, params=params, files=files,
@@ -265,7 +264,7 @@ class WebInspectApi(object):
                                             headers=headers, data=data,
                                             verify=self.verify_ssl)
 
-            logger('Response status code: {}'.format(str(response.status_code)))
+            print('Response status code: {}'.format(str(response.status_code)))
 
             try:
                 response.raise_for_status()
@@ -317,16 +316,3 @@ class WebInspectResponse(object):
         else:
             return json.dumps(self.data)
 
-
-#logging is good
-def logger(name):
-    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(module)s - %(message)s')
-
-    handler = logging.StreamHandler()
-    handler.setFormatter(formatter)
-
-    logger = logging.getLogger(name)
-    logger.setLevel(logging.ERROR)
-    logger.addHandler(handler)
-
-    return logger

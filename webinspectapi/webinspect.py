@@ -244,10 +244,6 @@ class WebInspectApi(object):
         headers.update({'User-Agent': self.user_agent})
 
         try:
-            print('Performing method {}'.format(method))
-            print('URL {}'.format(self.host + url))
-            print('params {}'.format(params))
-            print('headers {}'.format(headers))
 
             if self.auth_type == 'basic':
                 response = requests.request(method=method, url=self.host + url, params=params, files=files,
@@ -263,8 +259,6 @@ class WebInspectApi(object):
                 response = requests.request(method=method, url=self.host + url, params=params, files=files,
                                             headers=headers, data=data,
                                             verify=self.verify_ssl)
-
-            print('Response status code: {}'.format(str(response.status_code)))
 
             try:
                 response.raise_for_status()

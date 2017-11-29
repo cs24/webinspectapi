@@ -92,7 +92,7 @@ class WebInspectApi(object):
         if response.success:
             for policy in response.data:
                 if policy['name'] == name:
-                        return WebInspectResponse(success=True, message=None, data=policy, response_code=200)
+                    return WebInspectResponse(success=True, message=None, data=policy, response_code=200)
         return WebInspectResponse(success=True, message=None, data=None, response_code=404)
 
     def get_scan_by_name(self, scan_name):
@@ -205,7 +205,12 @@ class WebInspectApi(object):
         """
         return self._request('GET', '/webinspect/scanner/scans/' + str(scan_id) + '?action=waitforstatuschange')
 
-    #TODO implement complete set of actions trust CA, start, stop, download webmacro, delete.
+    def cert_proxy(self):
+        """
+        :return: WebInspect Certificate to import to browser
+        """
+        return self._request('GET', '/webinspect/proxy/rootcert', )
+
     def start_proxy(self, proxy_id, proxy_port, proxy_address):
         """
         :param proxy_id: Arbitrary user controlled ID for WI proxy .
@@ -213,9 +218,53 @@ class WebInspectApi(object):
         :param proxy_address: Address to be used to proxy traffic, typically the WI instance public addr.
         :return: creates socket listener with proxy port and address
         """
-        return self._request('POST', '/webinspect/proxy/' + 'instanceId=' + str(proxy_id) + '&amp;address='
-                             + str(proxy_port + '&amp;port=' + str(proxy_address)))
+        data = {
+            "instanceId": proxy_id,
+            "address": proxy_address,
+            "port": proxy_port,
+        }
+        return self._request('POST', '/webinspect/proxy/', data=data)
 
+    def delete_proxy(self, instance_id):
+        """
+        Stop proxy is not supported by WebInspect, use delete
+        :param instance_id: Arbitrary user controlled ID for WI webmacro
+        :return: Stop and delete proxy with specified instance_id
+        """
+        return self._request('DELETE', '/webinspect/proxy/' + str(instance_id))
+
+    def upload_webmacro_proxy(self, instance_id, macro_file_path):
+        """
+        :param instance_id: Arbitrary user controlled ID for WI webmacro
+        :param macro_file_path: Path to webmacro to upload
+        :return: Saves a webmacro onto WebInspect Server
+        """
+        try:
+            files = {'macro': open(macro_file_path, 'rb')}
+        except IOError as e:
+            return WebInspectResponse(success=False, message="Could not read file to upload {}.".format(e))
+
+        return self._request('PUT', '/webinspect/proxy/' + str(instance_id) + '.webmacro' + '?action=save', files=files)
+
+    def download_proxy_setting(self, instance_id):
+        """
+        :param instance_id: Arbitrary user controlled ID for WI webmacro
+        :return: Get setting '<name>.xml' from WebInspect Server
+        """
+        return self._request('GET', '/webinspect/proxy/' + str(instance_id) + '.xml')
+
+    def download_proxy_webmacro(self, instance_id):
+        """
+        :param instance_id: Arbitrary user controlled ID for WI webmacro
+        :return: Get webmacro '<name>.webmacro' from WebInspect Server
+        """
+        return self._request('GET', '/webinspect/proxy/' + str(instance_id) + '.webmacro')
+
+    def list_proxies(self):
+        """
+        :return: List all proxies in json format from server
+        """
+        return self._request('GET', '/webinspect/proxy', )
 
     @staticmethod
     def _build_list_params(param_name, key, values):
@@ -310,4 +359,3 @@ class WebInspectResponse(object):
             return json.dumps(self.data, sort_keys=True, indent=4, separators=(',', ': '))
         else:
             return json.dumps(self.data)
-

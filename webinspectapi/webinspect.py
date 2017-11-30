@@ -211,18 +211,21 @@ class WebInspectApi(object):
         """
         return self._request('GET', '/webinspect/proxy/rootcert', )
 
-    def start_proxy(self, proxy_id, proxy_port, proxy_address):
+    def start_proxy(self, id, port, address):
         """
-        :param proxy_id: Arbitrary user controlled ID for WI proxy .
-        :param proxy_port: Assigned port to initialize proxy traffic.
-        :param proxy_address: Address to be used to proxy traffic, typically the WI instance public addr.
+        :param id: Arbitrary user controlled ID for WI proxy .
+        :param port: Assigned port to initialize proxy traffic.
+        :param address: Address to be used to proxy traffic, typically the WI instance public addr.
         :return: creates socket listener with proxy port and address
         """
-        data = {
-            "instanceId": proxy_id,
-            "address": proxy_address,
-            "port": proxy_port,
-        }
+        json_data = """
+        {{
+            \"instanceId\"  : \"{0}\",
+            \"address\"     : \"{1}\",
+            \"port\"        : \"{2}\"
+        }}
+        """
+        data = json_data.format(id, address, port)
         return self._request('POST', '/webinspect/proxy/', data=data)
 
     def delete_proxy(self, instance_id):

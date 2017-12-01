@@ -269,6 +269,13 @@ class WebInspectApi(object):
         """
         return self._request('GET', '/webinspect/proxy', )
 
+    def get_proxy_information(self, instance_id):
+        """
+        :param instance_id: Arbitrary user controlled ID for WI webmacro
+        :return: Get information on proxy from WebInspect Server
+        """
+        return self._request('GET', '/webinspect/proxy/' + str(instance_id))
+
     @staticmethod
     def _build_list_params(param_name, key, values):
         """Builds a list of POST parameters from a list or single value."""

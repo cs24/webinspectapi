@@ -337,6 +337,12 @@ class WebInspectApi(object):
                 return WebInspectResponse(success=success, response_code=response_code, data=data)
             except ValueError as e:
                 return WebInspectResponse(success=False, message="JSON response could not be decoded {}.".format(e))
+            except requests.exceptions.HTTPError as e:
+                if response.status_code == 401:
+                    return WebInspectResponse(success=False, response_code=401, message=e)
+                else:
+                    return WebInspectResponse(
+                        message='There was an error while handling the request. {}'.format(response.content), success=False)
         except requests.exceptions.SSLError:
             return WebInspectResponse(message='An SSL error occurred.', success=False)
         except requests.exceptions.ConnectionError:

@@ -48,6 +48,28 @@ class WebInspectApi(object):
         """
         return self._request('POST', '/webinspect/scanner/scans/', data=overrides)
 
+    def create_wiswag(self, swagger_url, wiswag_name):
+        """
+        Pass in the swagger swagger url to create a settings file on the server.
+        :param swagger_url: a swagger json url: example: http://petstore.swagger.io/v2/swagger.json
+        :param wiswag_name: the desired wiswag name:
+        :return:
+        """
+
+        json_data = """
+        {
+            \"config\":
+            {
+                \"apiDefinition\"  : \"{0}\",
+            }
+                \"outputType\"     : \"settings\",
+                \"outputName\"     : \"{1}\"
+        }
+        """
+        data = json_data.format(swagger_url, wiswag_name)
+
+        return self._request('PUT', '/webinspect/scanner/wiswag/', data=data)
+
     def delete_policy(self, policy_guid):
         """
         :param policy_guid:

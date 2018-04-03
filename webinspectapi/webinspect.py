@@ -60,9 +60,9 @@ class WebInspectApi(object):
         json_data = """
         {{
             \"config\":
-            {
+            {{
                 \"apiDefinition\"  : \"{0}\",
-            }
+            }}
                 \"outputType\"     : \"settings\",
                 \"outputName\"     : \"{1}\"
         }}

@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 __author__ = "Brandon Spruth (brandon.spruth2@target.com), Jim Nelson (jim.nelson2@target.com)," \
-             "Matt Dunaj (matthew.dunaj@target.com)"
-__copyright__ = "(C) 2017 Target Brands, Inc."
-__contributors__ = ["Brandon Spruth", "Jim Nelson", "Matthew Dunaj"]
+             "Matt Dunaj (matthew.dunaj@target.com), Matthew Fevold (matthew.fevold@target.com)"
+__copyright__ = "(C) 2018 Target Brands, Inc."
+__contributors__ = ["Brandon Spruth", "Jim Nelson", "Matthew Dunaj", "Matthew Fevold"]
 __status__ = "Production"
 __license__ = "MIT"
 
@@ -53,18 +53,19 @@ class WebInspectApi(object):
         Pass in the swagger swagger url to create a settings file on the server.
         :param swagger_url: a swagger json url: example: http://petstore.swagger.io/v2/swagger.json
         :param wiswag_name: the desired wiswag name:
-        :return:
+
+        :return: Creates a setting file on the remote WebInspect Server
         """
 
         json_data = """
-        {
+        {{
             \"config\":
             {
                 \"apiDefinition\"  : \"{0}\",
             }
                 \"outputType\"     : \"settings\",
                 \"outputName\"     : \"{1}\"
-        }
+        }}
         """
         data = json_data.format(swagger_url, wiswag_name)
 
@@ -76,6 +77,15 @@ class WebInspectApi(object):
         :return: Delete the policy identified by the provided guid
         """
         return self._request('DELETE', '/webinspect/securebase/policy/' + policy_guid)
+
+    def download_settings(self, settings_name):
+        """
+        returns a xml of a settings file off of the webinspect server.
+        :param settings_name: name of the settings file you would like to download
+        :return: Downloads the xml setting file from the remote WebInspect server
+        """
+
+        return self._request('GET', '/webinspect/scanner/settings/' + str(settings_name))
 
     def export_scan_format(self, scan_id, extension, detail_type=None):
         """

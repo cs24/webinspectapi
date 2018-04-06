@@ -62,14 +62,18 @@ class WebInspectApi(object):
             \"config\":
             {{
                 \"apiDefinition\"  : \"{0}\",
-            }}
+            }},
                 \"outputType\"     : \"settings\",
                 \"outputName\"     : \"{1}\"
         }}
         """
         data = json_data.format(swagger_url, wiswag_name)
+        headers = {
+            'Accept': 'application/json'
+        }
+        headers.update({'Content-Type': 'application/json'})
 
-        return self._request('PUT', '/webinspect/scanner/wiswag/', data=data)
+        return self._request('PUT', '/webinspect/scanner/wiswag/', data=data, headers=headers)
 
     def delete_policy(self, policy_guid):
         """

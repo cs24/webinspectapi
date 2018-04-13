@@ -159,6 +159,12 @@ class WebInspectApi(object):
         """
         return self._request('GET', '/webinspect/securebase/policy')
 
+    def list_running_scans(self):
+        """
+        :return: returns a list of running scans
+        """
+        return self._request('GET', '/webinspect/scanner/scans?Status=running')
+
     def list_scans(self):
         """
         :return: Fetches a listing of current and past scans from the WebInspect scanner.

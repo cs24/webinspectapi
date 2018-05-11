@@ -17,13 +17,14 @@ from . import __version__ as version
 
 
 class WebInspectApi(object):
-    def __init__(self, host, username=None, password=None, verify_ssl=True, user_agent=None, cert=None):
+    def __init__(self, host, username=None, password=None, verify_ssl=True, user_agent=None, cert=None, timeout=60):
 
         self.host = host
         self.username = username
         self.password = password
         self.cert = cert
         self.verify_ssl = verify_ssl
+        self.timeout = timeout
 
         if not user_agent:
             self.user_agent = 'webinspectapi/' + version
@@ -351,15 +352,18 @@ class WebInspectApi(object):
                 response = requests.request(method=method, url=self.host + url, params=params, files=files,
                                             headers=headers, data=data,
                                             verify=self.verify_ssl,
+                                            timeout=self.timeout,
                                             auth=(self.username, self.password))
             elif self.auth_type == 'certificate':
                 response = requests.request(method=method, url=self.host + url, params=params, files=files,
                                             headers=headers, data=data,
                                             verify=self.verify_ssl,
+                                            timeout=self.timeout,
                                             cert=self.cert)
             else:
                 response = requests.request(method=method, url=self.host + url, params=params, files=files,
                                             headers=headers, data=data,
+                                            timeout=self.timeout,
                                             verify=self.verify_ssl)
 
             try:

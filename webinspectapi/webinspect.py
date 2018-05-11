@@ -17,7 +17,7 @@ from . import __version__ as version
 
 
 class WebInspectApi(object):
-    def __init__(self, host, username=None, password=None, verify_ssl=True, user_agent=None, cert=None, timeout=60):
+    def __init__(self, host, username=None, password=None, verify_ssl=True, user_agent=None, cert=None, timeout=None):
 
         self.host = host
         self.username = username
